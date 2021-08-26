@@ -14,7 +14,7 @@
                         </div>
                     @endif
                     <a href="{{ route('cadastro', ['id' => 'new'])}}"> Cadastrar um novo cliente</a>
-                    <h1>Lista de usuários</h1>
+                    <h1>Lista de clientes</h1>
 
                     <table class="table table-bordered">
                         <thead>
