@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Clientes;
+use Illuminate\Support\Facades\DB;
 use Redirect;
 
 
@@ -16,7 +17,6 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        $clientes = Clientes::get();
         $clientes = Clientes::paginate(10);
         return view('clientes.list', ['clientes' => $clientes ]);
     }
@@ -26,44 +26,10 @@ class ClientesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function cadastro($id)
     {
-        return view('clientes.form');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $cliente = new Clientes;
-        $cliente = $cliente->create ($request->all());
-        return Redirect::to('/clientes');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $cliente = Clientes::findOrFail($id);
+        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+        $cliente = DB::table('clientes')->where('id',$id)->first();
         return view('clientes.form', ['cliente' => $cliente]);
     }
 
@@ -74,11 +40,11 @@ class ClientesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function salvar(Request $request, $id)
     {
         $cliente = Clientes::findOrFail($id);
         $cliente->update($request->all());
-        return Redirect::to('/clientes');
+        return Redirect::to('/home');
     }
 
     /**

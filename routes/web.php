@@ -19,11 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'ClientesController@index')->name('home');
+Route::get('/teste1', 'HomeController@teste1')->name('teste1')->middleware('auth');
+Route::get('/teste2', 'HomeController@teste2')->name('teste2')->middleware('auth');
 
-Route::get('/clientes', 'ClientesController@index')->middleware('auth');
-Route::get('/clientes/novo', 'ClientesController@create')->middleware('auth');
-Route::post('/clientes/add', 'ClientesController@store')->middleware('auth');
-Route::get('/clientes/{id}/edit', 'ClientesController@edit')->middleware('auth');
-Route::post('/clientes/update/{id}', 'ClientesController@update')->middleware('auth');
-Route::delete('/clientes/delete/{id}', 'ClientesController@destroy')->middleware('auth');
+Route::get('/home', 'ClientesController@index')->name('home')->middleware('auth');
+Route::get('/clientes/{id}', 'ClientesController@cadastro')->name('cadastro')->middleware('auth');
+Route::post('/clientes/{id}', 'ClientesController@salvar')->name('salvar')->middleware('auth');
+Route::delete('/clientes/delete/{id}', 'ClientesController@destroy')->name('deletar')->middleware('auth');

@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <a href="{{ url('clientes/novo')}}"> Cadastrar um novo cliente</a>
+                    <a href="{{ route('cadastro', ['id' => 'new'])}}"> Cadastrar um novo cliente</a>
                     <h1>Lista de usuários</h1>
 
                     <table class="table table-bordered">
@@ -35,7 +35,7 @@
                                 <td>{{$cliente->email}}</td>
                                 <td>{{$cliente->status}}</td>
                                 <td>
-                                    <a href="clientes/{{ $cliente->id}}/edit" class="btn btn-info"> Editar </button>
+                                    <a href="{{ route('cadastro', ['id' => $cliente->id]) }}" class="btn btn-info"> Editar </a>
                                 </td>
                                 <td>
                                     <form action="clientes/delete/{{$cliente->id}}" method="post">
